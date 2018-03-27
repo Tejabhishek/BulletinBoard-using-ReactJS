@@ -5,8 +5,6 @@ import FaEdit from 'react-icons/lib/fa/edit'
 import FaTrash from "react-icons/lib/fa/trash";
 import FaFloppyO from "react-icons/lib/fa/floppy-o";
 
-var i;
-
 
 class Note extends Component {
     constructor(props) {
@@ -14,12 +12,12 @@ class Note extends Component {
         this.state = {
             editing: false
         }
-        this.i = 10;
         this.edit = this.edit.bind(this);
         this.remove = this.remove.bind(this);
         this.renderForm = this.renderForm.bind(this);
         this.renderDisplay = this.renderDisplay.bind(this);
         this.save = this.save.bind(this);
+        this.remove = this.remove.bind();
 
     }
 
@@ -27,9 +25,6 @@ class Note extends Component {
     edit() {
         console.log('====================================');
         console.log('Editing Note');
-        console.log('====================================');
-        console.log('====================================');
-        console.log(i);
         console.log('====================================');
         this.setState({
             editing: true
@@ -39,21 +34,25 @@ class Note extends Component {
     }
 
     remove() {
-        alert('removing note');
+
+        this.props.onRemove(this.props.index)
     }
 
-    save() {
-        alert('Saved')
-        alert(this._newText.value)
+    save(e) {
+        e.preventDefault();
+        this.props.onChange(this._newText.value, this.props.index)
+        this.setState({
+            editing: false
+        })
     }
 
 
     renderForm() {
         return (
             <div className="note">
-                <form>
+                <form onSubmit={this.save}>
                     <textarea ref={input => this._newText = input} />
-                    <button onClick={this.save}><FaFloppyO /></button>
+                    <button id="save"><FaFloppyO /></button>
 
                 </form>
 
