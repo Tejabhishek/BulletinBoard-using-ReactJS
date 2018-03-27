@@ -17,7 +17,7 @@ class Note extends Component {
         this.renderForm = this.renderForm.bind(this);
         this.renderDisplay = this.renderDisplay.bind(this);
         this.save = this.save.bind(this);
-        this.remove = this.remove.bind();
+        
 
     }
 
